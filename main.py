@@ -45,7 +45,7 @@ def bucle():
       n3 = random.randint(0,255)
       n4 = random.randint(0,255)
 
-      while ((n1 == 10) or (n1 == 127 and n2 == 0 and n3 == 0 and n4 == 1) or (n1 == 172 and (16 <= n2 >= 31)) or (n1 == 192 and n2 == 168)):
+      while ((n1 == 10) or (n1 == 127) or (n1 == 172 and (16 <= n2 >= 31)) or (n1 == 192 and n2 == 168)):
          n1 = random.randint(0,255)
          n2 = random.randint(0,255)
          n3 = random.randint(0,255)
