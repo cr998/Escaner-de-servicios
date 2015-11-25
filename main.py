@@ -40,19 +40,17 @@ def escanear(ip, puerto):
 
 def bucle():
    while (1):
-      temp1 = random.randint(1,3)
-
-      if (temp1 == 1):
-         n1 = random.randint(0,126)
-      elif (temp1 == 2):
-         n1 = random.randint(128,192)
-      elif (temp1 == 3):
-         n1 = random.randint(192,223)
-
-      n2 = random.randint(0,255)        
+      n1 = random.randint(0,255)
+      n2 = random.randint(0,255)
       n3 = random.randint(0,255)
       n4 = random.randint(0,255)
 
+      while ((n1 == 10) or (n1 == 127 and n2 == 0 and n3 == 0 and n4 == 1) or (n1 == 172 and (16 <= n2 >= 31)) or (n1 == 192 and n2 == 168)):
+         n1 = random.randint(0,255)
+         n2 = random.randint(0,255)
+         n3 = random.randint(0,255)
+         n4 = random.randint(0,255)
+        
       ip = str(n1) + "." + str(n2) + "." + str(n3) + "." + str(n4)
       
       puerto = random.choice(puertos)
