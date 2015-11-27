@@ -1,7 +1,7 @@
-DB_HOST = 'host'
-DB_USER = 'user'
-DB_PASS = 'pass'
-DB_NAME = 'db name'
+DB_HOST = '127.0.0.1'
+DB_USER = 'root'
+DB_PASS = 'alvaro1'
+DB_NAME = 'escaneo3'
 
 puertos = [20, 21, 22, 23, 25, 9999, 80, 514, 3306, 8080, 53, 110, 135, 143, 5900, 137, 111, 443, 515, 8888, 6667, 546, 631, 2082, 3389, 445]
 

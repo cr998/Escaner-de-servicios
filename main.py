@@ -3,6 +3,7 @@ import socket
 import MySQLdb
 import random
 import threading
+import string
 
 from config import *
 from respuesta import *
@@ -13,7 +14,7 @@ def run_query(query=''):
    conn = MySQLdb.connect(*datos)
    cursor = conn.cursor()
    cursor.execute(query)
-
+   
    if query.upper().startswith('SELECT'):
       data = cursor.fetchall()
    else:
@@ -38,6 +39,17 @@ def escanear(ip, puerto):
       s.close()
       return "Error"
 
+def lanzar_query(ip,puerto,banner):
+   puerto = str(puerto)
+   query = "INSERT INTO ips (ip) SELECT * FROM (SELECT '%s') AS tmp WHERE NOT EXISTS ( SELECT ip FROM ips WHERE ip = '%s' ) LIMIT 1;" % (ip,ip)
+   run_query(query)
+
+   idip = run_query("SELECT id FROM ips WHERE ip = '%s'" % ip)
+   idip = idip[0][0]
+
+   query = "INSERT INTO puertos (idip,puerto,respuesta) SELECT * FROM (SELECT '%s','%s','%s') AS tmp WHERE NOT EXISTS ( SELECT * FROM puertos WHERE idip = '%s' AND puerto = '%s' ) LIMIT 1;" % (idip,puerto,banner,idip,puerto)
+   run_query(query)
+
 def bucle():
    while (1):
       n1 = random.randint(0,255)
@@ -60,8 +72,8 @@ def bucle():
          if (banner != "Error"):
             if not banner:
                banner = "Puerto abierto"
-            query = "INSERT INTO datos (ip, puerto, banner) VALUES ('%s','%s','%s')" % (ip, puerto, banner)
-            run_query(query)
+            
+            lanzar_query(ip,puerto,banner)
             print ip + ":" + str(puerto)
       except:
          print "SQL error"
