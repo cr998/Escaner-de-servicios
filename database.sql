@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-11-2015 a las 02:35:21
+-- Tiempo de generación: 30-11-2015 a las 00:47:58
 -- Versión del servidor: 5.5.46-0+deb8u1
 -- Versión de PHP: 5.6.14-0+deb8u1
 
@@ -32,7 +32,14 @@ CREATE TABLE IF NOT EXISTS `ips` (
   `isp` varchar(255) DEFAULT NULL,
   `ciudad` varchar(120) DEFAULT NULL,
   `zona` int(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `ips`
+--
+
+INSERT INTO `ips` (`id`, `ip`, `isp`, `ciudad`, `zona`) VALUES
+(1, '1', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -43,11 +50,18 @@ CREATE TABLE IF NOT EXISTS `ips` (
 CREATE TABLE IF NOT EXISTS `puertos` (
 `id` int(11) NOT NULL,
   `idip` int(11) NOT NULL,
-  `tipo` varchar(10) NOT NULL DEFAULT 'TCP',
+  `tipo` varchar(10) NOT NULL DEFAULT 'TCP/UDP',
   `puerto` int(255) NOT NULL,
   `servicio` varchar(255) DEFAULT NULL,
   `respuesta` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `puertos`
+--
+
+INSERT INTO `puertos` (`id`, `idip`, `tipo`, `puerto`, `servicio`, `respuesta`) VALUES
+(1, 1, 'TCP/UDP', 1, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -73,12 +87,12 @@ ALTER TABLE `puertos`
 -- AUTO_INCREMENT de la tabla `ips`
 --
 ALTER TABLE `ips`
-MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `puertos`
 --
 ALTER TABLE `puertos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

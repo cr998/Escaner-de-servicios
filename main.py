@@ -41,13 +41,14 @@ def escanear(ip, puerto):
 
 def lanzar_query(ip,puerto,banner):
    puerto = str(puerto)
-   query = "INSERT INTO ips (ip) SELECT * FROM (SELECT '%s') AS tmp WHERE NOT EXISTS ( SELECT ip FROM ips WHERE ip = '%s' ) LIMIT 1;" % (ip,ip)
+   query = "INSERT INTO ips(ip) SELECT '%s' FROM ips WHERE NOT EXISTS (SELECT id FROM ips WHERE ip = '%s')LIMIT 1" % (ip,ip)
    run_query(query)
 
    idip = run_query("SELECT id FROM ips WHERE ip = '%s'" % ip)
    idip = idip[0][0]
 
-   query = "INSERT INTO puertos (idip,puerto,respuesta) SELECT * FROM (SELECT '%s','%s','%s') AS tmp WHERE NOT EXISTS ( SELECT * FROM puertos WHERE idip = '%s' AND puerto = '%s' ) LIMIT 1;" % (idip,puerto,banner,idip,puerto)
+   banner = str(MySQLdb.escape_string(banner))
+   query = "INSERT INTO puertos(idip,puerto,respuesta) SELECT '%s','%s','%s' FROM puertos WHERE NOT EXISTS (SELECT id FROM puertos WHERE idip = '%s' AND puerto = '%s')LIMIT 1" % (idip,puerto,banner,idip,puerto)
    run_query(query)
 
 def bucle():
