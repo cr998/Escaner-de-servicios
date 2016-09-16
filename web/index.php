@@ -27,6 +27,7 @@
 					{
 						$ip = mysql_query("SELECT * FROM ips WHERE id = '".$fila['idip']."'");
 						$fila2 = mysql_fetch_assoc($ip);
+						$fila2['ip']=file_get_content("http://api.hackertarget.com/reversedns/?q="+$fila2['ip'])
 						echo "<tr><td align=\"center\">".htmlentities($fila2['ip'])."</td><td align=\"center\">".htmlentities($fila['puerto'])."</td><td><pre>".htmlentities($fila['respuesta'])."</pre></td></tr>"; 
 					}
 					echo "</table>";
